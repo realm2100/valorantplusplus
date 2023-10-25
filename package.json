@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "axios": "^1.5.0",
+    "chalk": "^4.1.2",
+    "eslint": "^8.48.0",
+    "resedit-cli": "^2.0.0",
+    "table": "^6.8.1"
+  },
+  "name": "valorantplusplus",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "",
+  "license": "MIT",
+  "description": ""
+}
