@@ -4,6 +4,7 @@ const fs = require('fs');
 const axios = require('axios/dist/node/axios.cjs');
 const https = require('https');
 
+// 이거 없으면 코드 실행 끝나는 순간 콘솔이 닫혀버림
 setInterval(() => {}, 100000);
 
 process.on('uncaughtException', (err) => {
@@ -46,14 +47,14 @@ const readFile = (path) => {
   });
 };
 
-// MAIN LOGIC
-// VALORANT INTERNAL DATA
+// 메인 로직
 const vppVersion = 'Development Version';
 let lockfile = {}, entitlements = {}, val = {}, content = {};
 let basicAuthHeader;
 
 process.title = `VALORANT++ ${vppVersion}`;
 
+// 라이엇 클라이언트가 실행중인지 확인
 function getLockfile() {
   return new Promise((resolve, reject) => {
     readFile('$LOCALAPPDATA/Riot Games/Riot Client/Config/lockfile').then((res) => {
