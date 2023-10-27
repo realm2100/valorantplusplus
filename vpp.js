@@ -1,10 +1,10 @@
 const chalk = require('chalk');
 const {table, getBorderCharacters} = require('table');
-const fs = require('fs');
 const axios = require('axios/dist/node/axios.cjs');
 const https = require('https');
 
 const {colors} = require('./src/constants.js');
+const {readFile} = require('./src/fileIO.js');
 
 // 이거 없으면 코드 실행 끝나는 순간 콘솔이 닫혀버림
 setInterval(() => {}, 100000);
@@ -18,19 +18,6 @@ const partyIcon = '■';
 if (!chalk.supportsColor.hasBasic) {
   console.log('터미널이 색깔을 지원하지 않습니다! 정상 작동을 보장하기 어렵습니다.');
 }
-
-const readFile = (path) => {
-  return new Promise((resolve, reject) => {
-    try {
-      const data = fs.readFileSync(path.replace('$LOCALAPPDATA', process.env.LOCALAPPDATA), {
-        encoding: 'UTF-8'
-      });
-      resolve(data);
-    } catch (e) {
-      reject(e.code);
-    }
-  });
-};
 
 // 메인 로직
 const vppVersion = 'Development Version';
