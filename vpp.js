@@ -4,6 +4,8 @@ const fs = require('fs');
 const axios = require('axios/dist/node/axios.cjs');
 const https = require('https');
 
+const {colors} = require('./src/constants.js');
+
 // 이거 없으면 코드 실행 끝나는 순간 콘솔이 닫혀버림
 setInterval(() => {}, 100000);
 
@@ -11,23 +13,6 @@ process.on('uncaughtException', (err) => {
   console.log(err);
 });
 
-const colors = {
-  default: '#cccccc',
-  darkRed: '#fd4556',
-  brightRed: '#e74856',
-  darkGreen: '#13a10e',
-  brightGreen: '#16c60c',
-  darkYellow: '#c19c00',
-  brightYellow: '#f9f1a5',
-  darkBlue: '#0037da',
-  brightBlue: '#3b78ff',
-  darkPurple: '#881798',
-  brightPurple: '#b4009e',
-  darkCyan: '#3a96dd',
-  brightCyan: '#61d6d6',
-  white: '#ffffff',
-  vppBlue: '#659ad2',
-};
 const partyIcon = '■';
 
 if (!chalk.supportsColor.hasBasic) {
