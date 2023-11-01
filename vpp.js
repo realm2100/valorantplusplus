@@ -38,58 +38,34 @@ if (!chalk.supportsColor.hasBasic) {
 
 process.title = `VALORANT++ ${vppVersion}`;
 
-let lockfileAttempts = 0;
-let presenceAttempts = 0;
 let valOpened = false;
 function mainLoop() {
   if (!lockfile.port || !basicAuthHeader) {
     getLockfile().then(() => {
-      process.stdout.write('\x1bc');
-      console.log(chalk.hex(colors.brightGreen)('✔ Lockfile Data Retrieved\u001B[?25l'));
       setTimeout(mainLoop, 500);
     }).catch((eCode) => {
       if (eCode !== 'ENOENT') {
         console.log(chalk.hex(chalk.hex(colors.darkRed))(`FILESYSTEM ERROR: ${eCode}`));
-      } else {
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
-        process.stdout.write(`Waiting For ${chalk.hex(colors.brightRed)('Riot Client')} (${lockfileAttempts})\u001B[?25l`);
-        lockfileAttempts++;
       }
       setTimeout(mainLoop, 2500);
     });
   } else if (!entitlements.accessToken || !entitlements.subject || !entitlements.token) {
-    process.stdout.clearLine();
-    process.stdout.cursorTo(0);
     getEntitlements().then(() => {
-      console.log(chalk.hex(colors.brightGreen)('✔ Entitlements Retrieved'));
       return mainLoop();
     }).catch((e) => {
       if (e.code == 'ECONNREFUSED') {
         if (valOpened) {
           process.exit();
         } else {
-          process.stdout.clearLine();
-          process.stdout.cursorTo(0);
-          process.stdout.write(`Waiting For ${chalk.hex(colors.brightRed)('Riot Client')} (${lockfileAttempts})`);
           setTimeout(mainLoop, 1000);
         }
       } else {
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
-        process.stdout.write(`Waiting For ${chalk.hex(colors.brightRed)('Riot Client')} (${lockfileAttempts})`);
         setTimeout(mainLoop, 1000);
       }
     });
   } else {
     getPresence().then((presences) => {
       if (!presences || presences.length == 0) {
-        if (!valOpened) {
-          process.stdout.clearLine();
-          process.stdout.cursorTo(0);
-          process.stdout.write(`Waiting For ${chalk.hex(colors.brightRed)('VALORANT')} (${presenceAttempts})`);
-          presenceAttempts++;
-        }
         setTimeout(mainLoop, 5000);
       } else {
         let selfPresence;
@@ -101,27 +77,15 @@ function mainLoop() {
           }
         }
         if (!selfPresence) {
-          if (!valOpened) {
-            process.stdout.clearLine();
-            process.stdout.cursorTo(0);
-            process.stdout.write(`Waiting For ${chalk.hex(colors.brightRed)('VALORANT')} (${presenceAttempts})`);
-            presenceAttempts++;
-          }
           setTimeout(mainLoop, 5000);
         } else {
-          process.stdout.clearLine();
-          process.stdout.cursorTo(0);
           valOpened = true;
-          presenceAttempts = 0;
           if (!val.shard || !val.region || !val.version) {
             getLogfile().then(() => {
-              console.log(chalk.hex(colors.brightGreen)('✔ Logs Retrieved'));
               return mainLoop();
             });
           } else if (!content.seasons || !content.activeSeason) {
             getContent().then(() => {
-              console.log(chalk.hex(colors.brightGreen)('✔ Content Retrieved'));
-              console.log(`\nWelcome To ${chalk.hex(colors.vppBlue)('VALORANT')}${chalk.hex(colors.white)('++')} ${vppVersion}`);
               setTimeout(mainLoop, 5000);
             });
           } else if (selfPresence.isValid) {
@@ -150,10 +114,10 @@ function mainLoop() {
   }
 }
 
+console.log(`\nWelcome To ${chalk.hex(colors.vppBlue)('VALORANT')}${chalk.hex(colors.white)('++')} ${vppVersion}`);
 mainLoop();
 
 // GAME STATES
-
 
 let playersInParty = {};
 
