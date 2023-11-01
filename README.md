@@ -20,6 +20,8 @@ VALORANT++ will automatically detect VALORANT if it is running.
 
 ### Download
 
+(There are currently no releases.)
+
 1) Head to the releases page
 2) Download the latest release
 3) Run vpp.exe
