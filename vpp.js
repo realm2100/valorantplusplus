@@ -7,7 +7,9 @@ const axios = require('axios/dist/node/axios.cjs');
 const https = require('https');
 
 const {
-  colors
+  vppVersion,
+  colors,
+  partyIcon
 } = require('./src/constants.js');
 const {
   readFile
@@ -20,13 +22,10 @@ process.on('uncaughtException', (err) => {
   console.log(chalk.hex(colors.red)(err));
 });
 
-const partyIcon = '■';
-
 if (!chalk.supportsColor.hasBasic) {
   console.log('터미널이 색깔을 지원하지 않습니다! 정상 작동을 보장하기 어렵습니다.');
 }
 
-const vppVersion = 'Development Version';
 let lockfile = {}, entitlements = {}, val = {}, content = {};
 let basicAuthHeader;
 

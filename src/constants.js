@@ -1,3 +1,5 @@
+const vppVersion = 'Alpha';
+
 const colors = {
   default: '#cccccc',
   darkRed: '#fd4556',
@@ -16,6 +18,10 @@ const colors = {
   vppBlue: '#659ad2',
 };
 
+const partyIcon = '■';
+
 module.exports = {
-  colors: colors
+  vppVersion: vppVersion,
+  colors: colors,
+  partyIcon: partyIcon
 };
