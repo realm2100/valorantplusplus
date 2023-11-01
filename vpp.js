@@ -4,13 +4,13 @@ const axios = require('axios/dist/node/axios.cjs');
 const https = require('https');
 
 const {colors} = require('./src/constants.js');
-const {readFile} = require('./src/fileIO.js');
+const {readFile} = require('./src/requests.js');
 
-// 이거 없으면 코드 실행 끝나는 순간 콘솔이 닫혀버림
+// stops the window from closing after execution
 setInterval(() => {}, 100000);
 
 process.on('uncaughtException', (err) => {
-  console.log(err);
+  console.log(chalk.hex(colors.red(err)));
 });
 
 const partyIcon = '■';
