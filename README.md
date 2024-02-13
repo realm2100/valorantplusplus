@@ -4,6 +4,9 @@
     </a>
 <h1 align="center"> VALORANT++</h1>
 
+> [!IMPORTANT]  
+> This project is no longer being worked on.
+
 Inspired by [VALORANT rank yoinker](https://github.com/zayKenyon/VALORANT-rank-yoinker)
 
 ## About
